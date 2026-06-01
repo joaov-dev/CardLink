@@ -1,0 +1,174 @@
+/* ---------- Page container ---------- */
+.page {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 0 var(--s-4) var(--s-7);
+}
+.page--narrow {
+  max-width: 720px;
+}
+.page--flush {
+  padding-bottom: 0;
+}
+
+/* ---------- Page header ---------- */
+.pagehead {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-4);
+  margin: 0 calc(-1 * var(--s-4)) var(--s-4);
+  background: oklch(0.158 0.012 156 / 0.78);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s var(--ease-out);
+  min-height: 60px;
+}
+.pagehead:not(:first-child),
+.page:not(.page--flush) .pagehead {
+  border-bottom-color: var(--line-soft);
+}
+.pagehead__lead {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-width: 0;
+}
+.pagehead__back {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-left: -8px;
+  border-radius: var(--r-md);
+  color: var(--ink);
+  transition: background 0.15s var(--ease-out);
+  flex-shrink: 0;
+}
+.pagehead__back:hover {
+  background: var(--surface-2);
+}
+.pagehead__titles {
+  min-width: 0;
+}
+.pagehead__title {
+  font-size: var(--step-2);
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pagehead__sub {
+  font-size: var(--step--1);
+  color: var(--muted);
+  margin-top: 2px;
+}
+.pagehead__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-shrink: 0;
+}
+
+/* ---------- Section ---------- */
+.section {
+  margin-top: var(--s-6);
+}
+.section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-bottom: var(--s-4);
+}
+.section__head h2 {
+  font-size: var(--step-2);
+}
+.section__link {
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--primary);
+}
+.section__link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Item grid ---------- */
+.itemgrid {
+  display: grid;
+  /* minmax(0, 1fr) prevents the nowrap card name from blowing out the track */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-4);
+}
+@media (min-width: 560px) {
+  .itemgrid {
+    grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+    gap: var(--s-5);
+  }
+}
+
+/* One item per row on phones: compact horizontal rows (used in Descobrir).
+   Reverts to the card grid at >=560px. */
+@media (max-width: 559px) {
+  .itemgrid--rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .itemgrid--rows .itemcard {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--s-4);
+    padding: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-lg);
+  }
+  .itemgrid--rows .itemcard:hover,
+  .itemgrid--rows .itemcard:focus-visible {
+    transform: none;
+    border-color: var(--line);
+  }
+  .itemgrid--rows .itemcard__art {
+    width: 88px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .itemgrid--rows .itemcard:hover .itemcard__art,
+  .itemgrid--rows .itemcard:focus-visible .itemcard__art {
+    box-shadow: var(--shadow-sm);
+  }
+  .itemgrid--rows .itemcard__body {
+    gap: 7px;
+  }
+  .itemgrid--rows .itemcard__trade {
+    top: 6px;
+    right: 6px;
+    padding: 2px 7px;
+    font-size: 0.58rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* brand wordmark lives in the sidebar on desktop; drop the redundant top bar */
+  .pagehead--brand {
+    display: none;
+  }
+  .page {
+    padding: var(--s-6) var(--s-6) var(--s-8);
+  }
+  .pagehead {
+    margin-inline: calc(-1 * var(--s-6));
+    padding-inline: var(--s-6);
+    min-height: 76px;
+  }
+  .pagehead__title {
+    font-size: var(--step-3);
+  }
+}
